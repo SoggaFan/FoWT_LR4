@@ -92,16 +92,11 @@ document.getElementById('order-form').addEventListener('submit', e => {
   const orderData = {
     name: e.target.username.value,
     
-    phone: phone.value,
-    soup: selected.soup ? selected.soup.name : null,      // Вроде как это Nullish Coalescing
-    meal: selected.meal ? selected.meal.name : null,      // т.е. вместо undefined или ошибки
-    drink: selected.drink ? selected.drink.name : null,   // будет подставлена null
+    phone: e.target.phone.value,
+    soup: selected.soup?.keyword,      // Вроде как это Nullish Coalescing
+    meal: selected.meal?.keyword,      // т.е. вместо undefined или ошибки
+    drink: selected.drink?.keyword,   // будет подставлена null
     total: (selected.soup?.price || 0) + (selected.meal?.price || 0) + (selected.drink?.price || 0),
-    keywords: {
-      soup: soupKey.value,
-      meal: mealKey.value,
-      drink: drinkKey.value
-    }
   };
 
   console.log("Отправлен заказ:", orderData);   // Заказ будет отправлен в логи
